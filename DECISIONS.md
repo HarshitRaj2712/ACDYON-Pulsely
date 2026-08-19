@@ -1,4 +1,4 @@
-# Architectural Decisions & Trade-Offs — JobPulse
+# Architectural Decisions & Trade-Offs — Pulsely
 
 ## 1. Why This Ingestion Strategy Over the Obvious Alternative?
 
@@ -26,7 +26,7 @@ Under the project time limit, we prioritized building a robust, production-ready
 
 ## 3. AI Usage & Verification Transparency
 
-AI assistance (Gemini 3.6 Flash / Pair Programming Agent) was utilized during the development of JobPulse for:
+AI assistance (Gemini 3.6 Flash / Pair Programming Agent) was utilized during the development of Pulsely for:
 - **Boilerplate & Test Generation**: Accelerating initial setup of Express route handlers, Mongoose schemas, and Jest unit test skeletons.
 - **Glassmorphism CSS Styling**: Tailoring glass visual utility classes (`backdrop-blur`, translucent border tokens) in Tailwind CSS.
 

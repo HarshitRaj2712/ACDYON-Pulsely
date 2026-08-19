@@ -7,32 +7,32 @@ export default function Pagination({ pagination, onPageChange }) {
   if (!total || totalPages <= 1) return null;
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-white/10 text-xs text-slate-400">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-white/60 text-xs text-slate-500 font-medium">
       <div>
-        Showing page <strong className="text-slate-200">{page}</strong> of <strong className="text-slate-200">{totalPages}</strong> ({total} total listings)
+        Showing page <strong className="text-slate-800 font-bold">{page}</strong> of <strong className="text-slate-800 font-bold">{totalPages}</strong> ({total} total listings)
       </div>
 
       <div className="flex items-center space-x-2">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="glass-panel px-3 py-1.5 rounded-xl border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 flex items-center space-x-1 text-slate-200 transition-colors"
+          className="glass-panel px-3.5 py-1.5 rounded-xl border border-white/80 bg-white/70 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/90 flex items-center space-x-1 text-slate-700 font-bold transition-colors"
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft className="w-4 h-4 text-emerald-600" />
           <span>Previous</span>
         </button>
 
-        <span className="px-3 py-1.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-semibold">
+        <span className="px-3.5 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-300/80 text-emerald-800 font-black shadow-sm">
           {page}
         </span>
 
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="glass-panel px-3 py-1.5 rounded-xl border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 flex items-center space-x-1 text-slate-200 transition-colors"
+          className="glass-panel px-3.5 py-1.5 rounded-xl border border-white/80 bg-white/70 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/90 flex items-center space-x-1 text-slate-700 font-bold transition-colors"
         >
           <span>Next</span>
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-4 h-4 text-emerald-600" />
         </button>
       </div>
     </div>

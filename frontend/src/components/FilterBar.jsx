@@ -9,51 +9,51 @@ export default function FilterBar({ filters, setFilters, onApplyFilters }) {
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-4 mb-8 flex flex-wrap items-center gap-4 border border-white/10">
-      <div className="flex items-center space-x-2 text-xs font-semibold text-slate-300 pr-2 border-r border-white/10">
-        <Filter className="w-4 h-4 text-cyan-400" />
+    <div className="glass-panel rounded-2xl p-4 mb-8 flex flex-wrap items-center gap-4 border border-white/80 bg-white/55 backdrop-blur-2xl shadow-xl shadow-emerald-500/5">
+      <div className="flex items-center space-x-2 text-xs font-bold text-slate-700 pr-3 border-r border-white/60">
+        <Filter className="w-4 h-4 text-emerald-600" />
         <span>Filter Listings</span>
       </div>
 
       {/* Source Filter */}
-      <div className="flex items-center space-x-2 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
-        <Globe className="w-3.5 h-3.5 text-indigo-400" />
+      <div className="glass-pill flex items-center space-x-2 bg-white/40 px-3 py-1.5 rounded-xl border border-white/80 shadow-sm">
+        <Globe className="w-3.5 h-3.5 text-emerald-600" />
         <select
           value={filters.source || ''}
           onChange={(e) => handleChange('source', e.target.value)}
-          className="bg-transparent text-xs text-slate-200 focus:outline-none cursor-pointer"
+          className="bg-transparent text-xs text-slate-800 font-bold focus:outline-none cursor-pointer"
         >
-          <option value="" className="bg-slate-900 text-slate-200">All Sources</option>
-          <option value="weworkremotely" className="bg-slate-900 text-slate-200">WeWorkRemotely RSS</option>
-          <option value="mock-sandbox" className="bg-slate-900 text-slate-200">Mock Sandbox</option>
+          <option value="" className="bg-white text-slate-800">All Sources</option>
+          <option value="weworkremotely" className="bg-white text-slate-800">WeWorkRemotely RSS</option>
+          <option value="mock-sandbox" className="bg-white text-slate-800">Mock Sandbox</option>
         </select>
       </div>
 
       {/* Employment Type Filter */}
-      <div className="flex items-center space-x-2 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
-        <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
+      <div className="glass-pill flex items-center space-x-2 bg-white/40 px-3 py-1.5 rounded-xl border border-white/80 shadow-sm">
+        <Briefcase className="w-3.5 h-3.5 text-emerald-600" />
         <select
           value={filters.employmentType || ''}
           onChange={(e) => handleChange('employmentType', e.target.value)}
-          className="bg-transparent text-xs text-slate-200 focus:outline-none cursor-pointer"
+          className="bg-transparent text-xs text-slate-800 font-bold focus:outline-none cursor-pointer"
         >
-          <option value="" className="bg-slate-900 text-slate-200">All Employment Types</option>
-          <option value="Full-time" className="bg-slate-900 text-slate-200">Full-time</option>
-          <option value="Part-time" className="bg-slate-900 text-slate-200">Part-time</option>
-          <option value="Contract" className="bg-slate-900 text-slate-200">Contract</option>
-          <option value="Internship" className="bg-slate-900 text-slate-200">Internship</option>
+          <option value="" className="bg-white text-slate-800">All Employment Types</option>
+          <option value="Full-time" className="bg-white text-slate-800">Full-time</option>
+          <option value="Part-time" className="bg-white text-slate-800">Part-time</option>
+          <option value="Contract" className="bg-white text-slate-800">Contract</option>
+          <option value="Internship" className="bg-white text-slate-800">Internship</option>
         </select>
       </div>
 
       {/* Location Filter */}
-      <div className="flex items-center space-x-2 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
-        <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+      <div className="glass-pill flex items-center space-x-2 bg-white/40 px-3 py-1.5 rounded-xl border border-white/80 shadow-sm">
+        <MapPin className="w-3.5 h-3.5 text-emerald-600" />
         <input
           type="text"
           value={filters.location || ''}
           onChange={(e) => handleChange('location', e.target.value)}
           placeholder="Location (e.g. Remote)..."
-          className="bg-transparent text-xs text-slate-200 placeholder-slate-400 focus:outline-none w-32"
+          className="bg-transparent text-xs text-slate-800 font-bold placeholder-slate-400 focus:outline-none w-32"
         />
       </div>
 
@@ -64,7 +64,7 @@ export default function FilterBar({ filters, setFilters, onApplyFilters }) {
             setFilters(reset);
             onApplyFilters(reset);
           }}
-          className="text-xs text-cyan-400 hover:text-cyan-300 font-medium underline ml-auto"
+          className="text-xs text-emerald-700 hover:text-emerald-800 font-bold underline ml-auto"
         >
           Reset Filters
         </button>

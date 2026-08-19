@@ -105,19 +105,25 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col pb-16">
-      <Header systemHealth={systemHealth} />
+    <div className="min-h-screen flex flex-col pb-16 relative overflow-hidden">
+      {/* Ambient Glassmorphic Background Orbs (Green Apple Top-Left & South-Right) */}
+      <div className="fixed -top-32 -left-32 w-[600px] h-[600px] bg-emerald-400/30 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="fixed -bottom-32 -right-32 w-[650px] h-[650px] bg-green-500/30 rounded-full blur-[150px] pointer-events-none z-0" />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-400/15 rounded-full blur-[130px] pointer-events-none z-0" />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow">
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Header systemHealth={systemHealth} />
+
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow">
         {/* Toast Notification */}
         {toastMessage && (
           <div
-            className={`fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl glass-panel text-xs font-semibold shadow-2xl transition-all border ${
+            className={`fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl glass-panel text-xs font-bold shadow-2xl transition-all border ${
               toastMessage.type === 'error'
-                ? 'border-rose-500/40 text-rose-300 bg-rose-950/80'
+                ? 'border-rose-300 text-rose-800 bg-rose-50 shadow-lg shadow-rose-500/10'
                 : toastMessage.type === 'success'
-                ? 'border-emerald-500/40 text-emerald-300 bg-emerald-950/80'
-                : 'border-cyan-500/40 text-cyan-300 bg-slate-900/90'
+                ? 'border-emerald-300 text-emerald-800 bg-emerald-50 shadow-lg shadow-emerald-500/10'
+                : 'border-orange-300 text-orange-900 bg-orange-50 shadow-lg shadow-orange-500/10'
             }`}
           >
             {toastMessage.message}
@@ -168,9 +174,10 @@ export default function App() {
         )}
       </main>
 
-      <footer className="mt-16 text-center text-xs text-slate-500 border-t border-white/5 py-6">
+      <footer className="mt-16 text-center text-xs text-slate-500 font-medium border-t border-orange-200/40 py-6">
         JobPulse — Resilient Listing Ingestion Platform &copy; 2026. Safe Public Data Aggregation.
       </footer>
+      </div>
     </div>
   );
 }

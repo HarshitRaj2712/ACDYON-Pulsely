@@ -69,7 +69,7 @@ class HttpClient {
         const response = await axios.get(url, {
           timeout: timeoutMs,
           headers: {
-            'User-Agent': 'JobPulse-Ingestion-Bot/1.0 (Public Authorized Listing Ingestion Platform)',
+            'User-Agent': 'Pulsely-Ingestion-Bot/1.0 (Public Authorized Listing Ingestion Platform)',
             ...options.headers
           },
           responseType: options.responseType || 'text',

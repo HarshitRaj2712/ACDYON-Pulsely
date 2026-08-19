@@ -1,5 +1,5 @@
 {
-  "name": "jobpulse",
+  "name": "pulsely",
   "version": "1.0.0",
   "description": "Resilient job listing aggregation and ingestion platform",
   "main": "backend/src/server.js",

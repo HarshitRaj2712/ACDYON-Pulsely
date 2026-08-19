@@ -6,7 +6,7 @@ const getHealth = (req, res) => {
 
   res.json({
     status: 'ok',
-    service: 'JobPulse Backend',
+    service: 'Pulsely Backend',
     timestamp: new Date().toISOString(),
     database: states[dbState] || 'unknown'
   });

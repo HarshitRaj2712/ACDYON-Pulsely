@@ -1,6 +1,6 @@
-# Ingestion Architecture & Security Analysis — JobPulse
+# Ingestion Architecture & Security Analysis — Pulsely
 
-> **Note**: This is a technical design and architectural analysis document. JobPulse does **not** implement anti-bot evasions, CAPTCHA bypasses, or unauthorized scraping routines. The live deployed demo operates exclusively on authorized public RSS feeds and sandbox APIs.
+> **Note**: This is a technical design and architectural analysis document. Pulsely does **not** implement anti-bot evasions, CAPTCHA bypasses, or unauthorized scraping routines. The live deployed demo operates exclusively on authorized public RSS feeds and sandbox APIs.
 
 ---
 
@@ -22,11 +22,11 @@ Automated HTTP clients and headful browser automation scripts expose distinct fi
    - Missing standard modern headers (`Sec-Ch-Ua`, `Sec-Fetch-Dest`, `Sec-Fetch-Mode`, `Sec-Fetch-Site`).
    - Mismatched `User-Agent` string with client capabilities.
 
-### How JobPulse Conceptually Accounts for Detection Surface
-Even though JobPulse operates on safe public feeds:
+### How Pulsely Conceptually Accounts for Detection Surface
+Even though Pulsely operates on safe public feeds:
 - **Rate-Limiting & Pacing**: `HttpClient` enforces configurable delays (`REQUEST_DELAY_MS`) between requests to avoid burst patterns.
 - **Jitter Backoff**: Retries use randomized exponential backoff (`base * 2^attempt + jitter`) to eliminate fixed-frequency request signatures.
-- **Controlled User-Agents**: Standardized client identification headers expressing transparent platform identity (`JobPulse-Ingestion-Bot/1.0`).
+- **Controlled User-Agents**: Standardized client identification headers expressing transparent platform identity (`Pulsely-Ingestion-Bot/1.0`).
 
 ---
 
@@ -70,7 +70,7 @@ A production-grade ingestion platform pulling data across multiple providers req
 
 ## 3. Pipeline Resilience
 
-JobPulse protects data integrity and system uptime against common external integration hazards:
+Pulsely protects data integrity and system uptime against common external integration hazards:
 
 | Hazard Scenario | Pipeline Resilience Response |
 | :--- | :--- |
@@ -84,7 +84,7 @@ JobPulse protects data integrity and system uptime against common external integ
 
 ## 4. Ethical Boundaries & ToS Line (Where We Stop)
 
-Responsibility and legal compliance are strict architectural boundaries in JobPulse:
+Responsibility and legal compliance are strict architectural boundaries in Pulsely:
 
 > [!CAUTION]
 > **Definitive Ethical Line**:
@@ -93,4 +93,4 @@ Responsibility and legal compliance are strict architectural boundaries in JobPu
 > - **No Anti-Bot Spoofing**: We do not use residential proxy pools or TLS fingerprint spoofing libraries to bypass active platform blocks.
 > - **Strict robots.txt & ToS Respect**: Ingestion is limited to public RSS feeds, authorized developer APIs, or self-controlled sandbox endpoints.
 
-By building resilient ingestion on authorized endpoints, JobPulse demonstrates production software engineering principles while adhering strictly to ethical standards.
+By building resilient ingestion on authorized endpoints, Pulsely demonstrates production software engineering principles while adhering strictly to ethical standards.

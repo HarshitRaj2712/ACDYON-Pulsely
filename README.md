@@ -1,15 +1,24 @@
-# JobPulse — Resilient Job Listing Ingestion Platform
+# Pulsely — Resilient Job Listing Ingestion Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-green.svg)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-v18-cyan.svg)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-Glassmorphism-38bdf8.svg)](https://tailwindcss.com/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-Ultra--Glassmorphism-38bdf8.svg)](https://tailwindcss.com/)
+[![Deployment Status](https://img.shields.io/badge/Production-Live-emerald.svg)](https://acdyon-pulsely2712.vercel.app/)
 
-**JobPulse** is a resilient, production-grade job listing aggregation and ingestion platform. It pulls job listings from authorized public sources, normalizes them into a unified schema, deduplicates records in MongoDB, tracks source health, handles failures with exponential backoff and automatic fallback adapters, and presents them in a React glassmorphic dashboard.
+**Pulsely** is a production-grade, resilient job listing aggregation and ingestion platform. It pulls job listings from authorized public feeds, normalizes them into a unified schema, deduplicates records in MongoDB, monitors source health state, handles failures with exponential backoff and automatic fallback adapters, and presents them in an ultra-glassmorphic React dashboard styled with a Green Apple & Light theme.
 
 ---
 
-## Architecture
+## 🌐 Live Deployments
+
+- **Live Web Application (Frontend)**: [https://acdyon-pulsely2712.vercel.app/](https://acdyon-pulsely2712.vercel.app/)
+- **Production REST API (Backend)**: [https://acdyon-pulsely.onrender.com/](https://acdyon-pulsely.onrender.com/)
+- **Health Check Endpoint**: [https://acdyon-pulsely.onrender.com/api/health](https://acdyon-pulsely.onrender.com/api/health)
+
+---
+
+## Architecture Overview
 
 ```text
                 ┌─────────────────────┐
@@ -60,9 +69,9 @@
 
 ## Problem Statement
 
-External job feeds and web APIs are inherently unpredictable. They suffer from network timeouts, rate limits (HTTP 429), temporary server downtime (HTTP 5xx), schema inconsistencies, and duplicate records. Simple ingestion scripts crash or create corrupted database states under these conditions.
+External job feeds and web APIs are inherently unpredictable. They suffer from network timeouts, rate limits (HTTP 429), temporary server downtime (HTTP 5xx), schema inconsistencies, and duplicate records. Naive ingestion scripts crash or create corrupted database states under these conditions.
 
-JobPulse solves this by implementing a **resilient ingestion architecture** built on rate pacing, timeout bounds, transient error retry with exponential backoff, database-level deduplication, health tracking state, and automatic adapter fallback.
+**Pulsely** solves this by implementing a **resilient ingestion architecture** built on rate pacing, timeout bounds, transient error retry with exponential backoff, database-level deduplication, health tracking state, and automatic adapter fallback.
 
 ---
 
@@ -70,8 +79,8 @@ JobPulse solves this by implementing a **resilient ingestion architecture** buil
 
 ### Frontend
 - **Framework**: React (Vite)
-- **Styling**: Tailwind CSS (Custom Glassmorphism UI System)
-- **Icons**: Lucide React
+- **Styling**: Tailwind CSS (Custom Green Apple Ultra-Glassmorphism UI)
+- **Icons**: Lucide React & Pulsely Pulse Emblem
 - **HTTP Client**: Axios
 
 ### Backend
@@ -85,18 +94,19 @@ JobPulse solves this by implementing a **resilient ingestion architecture** buil
 
 ## Key Features
 
-1. **Adapter-Based Ingestion**: Modular source architecture supporting primary feeds (`WeworkRemotelyAdapter`) and secondary sandbox fallbacks (`MockJobAdapter`).
+1. **Adapter-Based Ingestion Architecture**: Modular source architecture supporting primary feeds (`WeworkRemotelyAdapter`) and secondary sandbox fallbacks (`MockJobAdapter`).
 2. **Resilient HTTP Engine**:
    - **Timeout Aborts**: `AbortController` bounded timeouts preventing hanging requests.
-   - **Rate Limiting**: Configurable pacing delay between requests.
+   - **Rate Limiting & Pacing**: Configurable delay pacing between outbound requests.
    - **Exponential Backoff**: Jittered exponential retries (`base * 2^attempt + random(0..100)`) strictly for transient errors.
-3. **Database Deduplication**: Compound index (`source + sourceId`) in MongoDB preventing duplicate insertions while tracking metrics.
-4. **Source Health Tracking**: Dynamic health state evaluation (`healthy`, `degraded`, `failed`) based on consecutive failures.
-5. **Glassmorphic React Dashboard**:
-   - Live ingestion metrics panel & manual run trigger button.
-   - Search by job title, company, or keyword.
+3. **Database Deduplication**: Compound unique index (`source + sourceId`) in MongoDB preventing duplicate insertions while tracking metrics.
+4. **Source Health Tracking**: Dynamic health state evaluation (`healthy`, `degraded`, `failed`) based on consecutive failure tracking.
+5. **Ultra-Glassmorphic Green Apple Dashboard**:
+   - Live ambient background refractions (Green Apple top-left & south-right gradients).
+   - Live ingestion metrics control panel & manual pipeline trigger.
+   - Instant search across job title, company, or tech stack.
    - Filters by location, source, and employment type.
-   - Clean loading skeletons, empty state, and error handling.
+   - Clean skeleton loaders, empty states, and error retry state.
 
 ---
 
@@ -196,14 +206,23 @@ Record Health Metrics & Return Statistics
 
 ### 4. Health Check
 - **GET** `/api/health`
+- **Response**:
+  ```json
+  {
+    "status": "ok",
+    "service": "Pulsely Backend",
+    "timestamp": "2026-08-19T23:30:00.000Z",
+    "database": "connected"
+  }
+  ```
 
 ---
 
-## Local Setup & Quickstart
+## Local Setup & Installation
 
 ### Prerequisites
 - Node.js (v18+)
-- MongoDB (Running locally on `mongodb://127.0.0.1:27017/jobpulse` or MongoDB Atlas URI)
+- MongoDB (Running locally on `mongodb://127.0.0.1:27017/pulsely` or MongoDB Atlas connection string)
 
 ### Installation
 Clone the repository and install all dependencies:
@@ -213,14 +232,14 @@ Clone the repository and install all dependencies:
 npm run install:all
 ```
 
-### Environment Setup
+### Environment Configuration
 Create `.env` inside `backend/`:
 
 ```env
 PORT=5000
 NODE_ENV=development
 CLIENT_ORIGIN=http://localhost:5173
-MONGO_URI=mongodb://127.0.0.1:27017/jobpulse
+MONGO_URI=mongodb://127.0.0.1:27017/pulsely
 
 REQUEST_TIMEOUT_MS=10000
 REQUEST_DELAY_MS=1000
@@ -232,29 +251,30 @@ FALLBACK_SOURCE_URL=https://hnrss.org/jobs
 ```
 
 ### Running Locally
-Start both backend and frontend concurrently:
+Start backend and frontend services concurrently:
 
 ```bash
 npm run dev
 ```
 
-- Frontend: `http://localhost:5173`
+- Frontend App: `http://localhost:5173`
 - Backend API: `http://localhost:5000`
 
 ---
 
-## Running Automated Tests
+## Automated Tests
 
-Run backend unit and integration tests:
+Run backend unit and integration test suites:
 
 ```bash
 npm test
 ```
 
 Tests cover:
-- Job normalization & HTML stripping
+- Job normalization & HTML tag stripping
 - Deterministic ID hashing
 - Error classification & transient retry logic
+- API endpoint integration
 
 ---
 
@@ -263,7 +283,7 @@ Tests cover:
 | Variable | Description | Default |
 | :--- | :--- | :--- |
 | `PORT` | Backend server port | `5000` |
-| `MONGO_URI` | MongoDB connection string | `mongodb://127.0.0.1:27017/jobpulse` |
+| `MONGO_URI` | MongoDB connection string | `mongodb://127.0.0.1:27017/pulsely` |
 | `CLIENT_ORIGIN` | CORS allowed origin | `http://localhost:5173` |
 | `REQUEST_TIMEOUT_MS` | Max request timeout before abort | `10000` |
 | `REQUEST_DELAY_MS` | Minimum delay between outbound requests | `1000` |
@@ -273,28 +293,23 @@ Tests cover:
 
 ---
 
-## Deployment Guide
+## Deployment Configuration
 
-### Backend (Render / Railway)
-1. Set root directory to `backend`.
-2. Build command: `npm install`
-3. Start command: `npm start`
-4. Configure environment variables in dashboard (including `MONGO_URI` pointing to MongoDB Atlas).
+### Backend (Render)
+- **Live Endpoint**: [https://acdyon-pulsely.onrender.com/](https://acdyon-pulsely.onrender.com/)
+- **Root Directory**: `backend`
+- **Build Command**: `npm install`
+- **Start Command**: `npm start`
+- **Environment Variables**: Set `MONGO_URI` (MongoDB Atlas), `CLIENT_ORIGIN`, `NODE_ENV=production`.
 
 ### Frontend (Vercel)
-1. Set root directory to `frontend`.
-2. Framework preset: Vite
-3. Environment Variable: `VITE_API_URL` -> Production backend URL.
+- **Live Application**: [https://acdyon-pulsely2712.vercel.app/](https://acdyon-pulsely2712.vercel.app/)
+- **Root Directory**: `frontend`
+- **Framework Preset**: Vite
+- **Environment Variable**: `VITE_API_URL` -> `https://acdyon-pulsely.onrender.com/api`
 
 ---
 
-## Limitations & Future Improvements
+## License
 
-### Limitations
-- Ingestion runs on demand or when manually triggered (no background daemon without external cron).
-- Relies on structured RSS fields; unformatted free-text fields require heuristic extraction.
-
-### Future Improvements
-1. **Background Cron Service**: Integrate `node-cron` or Redis queues for background ingestion.
-2. **Salary Extraction Engine**: NLP regex parser for extracting min/max salary ranges.
-3. **Realtime WebSockets**: Push ingestion metrics directly to connected clients via Socket.io.
+This project is open source and available under the [MIT License](LICENSE).

@@ -1,7 +1,7 @@
 {
-  "name": "jobpulse-backend",
+  "name": "pulsely-backend",
   "version": "1.0.0",
-  "description": "JobPulse Resilient Backend Service",
+  "description": "Pulsely Resilient Backend Service",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
